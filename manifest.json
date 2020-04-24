@@ -3,14 +3,17 @@
     "name": "Just the Recipe",
     "version": "1.0",
     "description": "Eliminate the blog fluff and get straight to the recipe",
+    "homepage_url": "https://www.github.com/winsome/justtherecipe",
     "icons": {
         "48": "icons/carrot-48.png",
         "96": "icons/carrot-96.png"
     },
-    "content_scripts": [
-        {
-            "matches": ["*://*.mozilla.org/*"],
-            "js": ["recipe.js"]
-        }
-    ]
+    "permissions": [
+        "activeTab"
+    ],
+    "browser_action": {
+        "default_icon": "icons/carrot-32.png",
+        "default_title": "Just the Recipe",
+        "default_popup": "popup/recipe.html"
+    }
 }
