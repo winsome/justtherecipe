@@ -2,10 +2,15 @@ function doSomething(data) {
     document.addEventListener("click", (e) => {
 
         function sendText(tabs) {
-            console.log("sendText");
             browser.tabs.sendMessage(tabs[0].id, {
                 command: "text",
                 text: "Hello World!"
+            });
+        }
+
+        function reset(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "reset"
             });
         }
 
@@ -13,10 +18,15 @@ function doSomething(data) {
             console.error(`Could not find recipe: ${err}`);
         }
 
-        browser.tabs.query({ active: true, currentWindow: true })
-            .then(sendText)
-            .catch(reportError);
-
+        if (e.target.classList.contains("action")) {
+            browser.tabs.query({ active: true, currentWindow: true })
+                .then(sendText)
+                .catch(reportError);
+        } else {
+            browser.tabs.query({ active: true, currentWindow: true })
+                .then(reset)
+                .catch(reportError);
+        }
     });
 }
 
